@@ -19,114 +19,106 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import "../components"
 
-
 Page {
     id: sketchPage
-    property bool clearRequested: true;
-    property bool undoRequested: false;
     property bool isDrawing: false;
-    property real mousePosX: 0;
-    property real mousePosY: 0;
-    property variant imageStack: [];
-    property var ctx;
-    property real penWidth: 6;
-    property real penHeight: 6;
+    property bool drawingStarted: false;
+    property bool drawingFinished: false;
+    property bool clearRequested: false;
+    property variant imageStack: ["hi", "vegetables"]
 
     MouseArea {
-        id: inputArea
+        property int mx: 0;
+        property int my: 0;
+        id: input
         anchors.fill: canvas
 
-        onClicked: {
-            print("input detected")
-        }
         onPressed: {
-            startDraw(mouse)
+            mx = mouse.x;
+            my = mouse.y;
+            sketchPage.drawingStarted = true;
+            canvas.requestPaint();
         }
         onPositionChanged: {
-            updateDraw(mouse)
+            mx = mouse.x;
+            my = mouse.y;
+            sketchPage.isDrawing = true;
+            canvas.requestPaint();
         }
         onReleased: {
-            endDraw(mouse)
+            isDrawing = false;
+            drawingFinished = true;
+            canvas.requestPaint();
         }
+    }
+
+    BorderImage {
+        id: shadow
+        source: "../graphics/shadow.png"
+        width: canvas.width + 16; height: canvas.height + 16
+        border.left: 8; border.top: 8
+        border.right: 8; border.bottom: 8
+        anchors.centerIn: canvas
     }
 
     Canvas {
         id: canvas
-        anchors.fill: parent
-        renderStrategy: Canvas.Threaded
+        anchors.centerIn: parent
+        renderStrategy: Canvas.Immediate
+        antialiasing: true
+        smooth: true
+
+        Component.onCompleted: {
+            width = mainView.width - units.gu("5");
+            height = mainView.height - units.gu("5");
+        }
 
         onPaint: {
-            paintSketch();
+            print("mouse X: " + input.mx);
+            print("mouse Y: " + input.my);
+            var ctx = canvas.getContext('2d');
+            ctx.strokeStyle = "#808080";
+
+            if (clearRequested) {
+                print("clear requested");
+                ctx.reset();
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = "white";
+                ctx.rect(0, 0, width, height);
+                ctx.fill();
+                clearRequested = false;
+            }
+
+            if (sketchPage.drawingStarted) {
+                print("drawing started");
+                ctx.beginPath();
+                ctx.moveTo(input.mx, input.my);
+                drawingStarted = false;
+            }
+            else if (sketchPage.isDrawing) {
+//                print("drawing continues...");
+                ctx.lineTo(input.mx, input.my);
+                ctx.stroke();
+                isDrawing = false;
+            }
+            else if (sketchPage.drawingFinished) {
+                print("drawing finished");
+                drawingFinished = false;
+            }
         }
+    }
+
+    function newDrawing() {
+        print("New Drawing")
+        clearRequested = true;
+        canvas.requestPaint();
+    }
+
+    function undo() {
+        print("undoing");
     }
 
     tools: CanvasToolbar {
 
-    }
-
-    function newDrawing() {
-        clearRequested = true;
-        imageStack.length = 0;
-    }
-
-    function undo() {
-        undoRequested = true;
-        canvas.requestPaint();
-        print("undo requested: " + undoRequested);
-    }
-
-    function startDraw(evts) {
-        print("drawing started")
-        isDrawing = true;
-        mousePosX = evts.x;
-        mousePosY = evts.y;
-        canvas.requestPaint();
-    }
-
-    function updateDraw(evts) {
-        mousePosX = evts.x;
-        mousePosY = evts.y;
-        canvas.requestPaint();
-    }
-
-    function endDraw(evts) {
-        isDrawing = false;
-        mousePosX = evts.x;
-        mousePosY = evts.y;
-        imageStack.push(ctx.getImageData(canvas.width, canvas.height));
-        canvas.requestPaint();
-    }
-
-    function paintSketch() {
-        ctx = canvas.getContext("2d");
-        print("painting")
-        if (clearRequested) {
-            clear();
-        }
-
-        print("isDrawing: " + isDrawing);
-        if (isDrawing) {
-            ctx.fillStyle = "#FFF0A5"
-            ctx.ellipse(mousePosX - penWidth/2, mousePosY - penHeight/2,
-                        penWidth, penHeight);
-            ctx.fill();
-        }
-
-        print("undo requested: " + undoRequested);
-        if (undoRequested) {
-            print("undoing");
-            imageStack.pop();
-            ctx.putImageData(imageStack[imageStack.length], 0, 0);
-            undoRequested = false;
-        }
-    }
-
-    function clear() {
-        ctx = canvas.getContext("2d");
-        ctx.fillStyle = "white";
-        ctx.rect(0, 0, canvas.width, canvas.height);
-        ctx.fill();
-        imageStack.push(ctx.getImageData(canvas.width, canvas.height));
-        clearRequested = false;
     }
 }
