@@ -8,20 +8,27 @@ Graphite is a drawing application for Ubuntu touch designed to run primarily on 
 
 This app is being developed for the [Ubuntu App Showdown](http://developer.ubuntu.com/showdown/).
 
+### Changes ###
 
-## TODO and known issues ##
+* Tuesday, 13th August 2013
+    + added fixed canvas size and border with drop shadow
+    + fixed general drawing bugs
+    + implemented basic drawing logic
+    + initial commit
 
-This app is far from complete and is extremely early in development.
+### TODO and known issues ###
+
+This app is **far** from complete.
 
 * Implement drawing logic in SketchPage.qml
-    + putImageData() doesn't like accepting variables of type CanvasImageData
-    + mousePosX and mousePosY are not defining for some reason
     + write logic for different tools:
         * pen
         * pencil
         * eraser
-* Complete EventsTab.qml
-* Complete AllSketchesTab.qml
-* Write SketchbooksTab.qml
+    + write undo functionality
+    + add colour switcher tool
+* Complete EventsPage.qml
+* Complete AllSketchesPage.qml
+* Write SketchbooksPage.qml
 * Implement logic for saving files (local storage and Ubuntu One, any ideas how?)
 * Implement logic for sharing with online accounts
