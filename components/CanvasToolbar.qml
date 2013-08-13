@@ -33,6 +33,14 @@ ToolbarItems {
     }
 
     ToolbarButton {
+        text: i18n.tr("Tools")
+        iconSource: icon("edit")
+    }
+    ToolbarButton {
+        text: i18n.tr("Colours")
+        iconSource: Qt.resolvedUrl("../graphics/wheel.svg")
+    }
+    ToolbarButton {
         text: i18n.tr("Undo")
         iconSource: icon("undo")
 
