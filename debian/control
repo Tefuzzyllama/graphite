@@ -1,0 +1,15 @@
+Source: graphite
+Section: unknown
+Priority: extra
+Maintainer: Adam Cowdy <tefuzzyllama@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+#Vcs-Git: git://git.debian.org/collab-maint/graphite.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/graphite.git;a=summary
+
+Package: graphite
+Architecture: all
+Depends: ${misc:Depends},qtdeclarative5-localstorage-plugin,qtdeclarative5-particles-plugin,qtdeclarative5-qtquick2-plugin,qtdeclarative5-ubuntu-ui-toolkit-plugin|qt-components-ubuntu,qtdeclarative5-window-plugin,qtdeclarative5-xmllistmodel-plugin,${shlibs:Depends},ubuntu-ui-toolkit-theme,ubuntu-ui-toolkit-theme,qmlscene
+Description: Advanced drawing application for multiple devices
+ Graphite is a drawing, note taking and sketching application designed to run
+ on phones, desktops and tablets.
