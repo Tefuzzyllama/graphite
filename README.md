@@ -10,6 +10,9 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### Changes ###
 
+* Wednesday, 14th August 2013
+    + added undo support
+
 * Tuesday, 13th August 2013
     + added fixed canvas size and border with drop shadow
     + fixed general drawing bugs
@@ -25,7 +28,6 @@ This app is **far** from complete.
         * pen
         * pencil
         * eraser
-    + write undo functionality
     + add colour switcher tool
 * Complete EventsPage.qml
 * Complete AllSketchesPage.qml
