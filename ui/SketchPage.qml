@@ -25,7 +25,11 @@ Page {
     property bool drawingStarted: false;
     property bool drawingFinished: false;
     property bool clearRequested: false;
-    property variant imageStack: ["hi", "vegetables"]
+    property bool undoRequested: false;
+
+    ListModel {
+        id: undoStack
+    }
 
     MouseArea {
         property int mx: 0;
@@ -64,7 +68,7 @@ Page {
     Canvas {
         id: canvas
         anchors.centerIn: parent
-        renderStrategy: Canvas.Immediate
+        renderStrategy: Canvas.Threaded
         antialiasing: true
         smooth: true
 
@@ -73,11 +77,14 @@ Page {
             height = mainView.height - units.gu("5");
         }
 
+        onImageLoaded: {
+            print("image loaded")
+        }
+
         onPaint: {
-            print("mouse X: " + input.mx);
-            print("mouse Y: " + input.my);
+//            print("mouse X: " + input.mx);
+//            print("mouse Y: " + input.my);
             var ctx = canvas.getContext('2d');
-            ctx.strokeStyle = "#808080";
 
             if (clearRequested) {
                 print("clear requested");
@@ -89,8 +96,26 @@ Page {
                 clearRequested = false;
             }
 
+            if (undoRequested) {
+                print("undo requested");
+                if (undoStack.count > 0) {
+                    print("undo stack: " + undoStack.count);
+                    ctx.drawImage(undoStack.get(undoStack.count - 1).src, 0, 0);
+                    undoStack.remove(undoStack.count - 1);
+                    print("undo finished");
+                }
+                else {
+                    print("undo stach = 0")
+                }
+
+                undoRequested = false;
+            }
+
             if (sketchPage.drawingStarted) {
                 print("drawing started");
+                undoStack.append({"src": canvas.toDataURL("image/png")});
+                canvas.loadImage(undoStack.get(undoStack.count - 1).src);
+                print("undo stack: " + undoStack.count);
                 ctx.beginPath();
                 ctx.moveTo(input.mx, input.my);
                 drawingStarted = false;
@@ -109,13 +134,16 @@ Page {
     }
 
     function newDrawing() {
-        print("New Drawing")
+        print("New Drawing");
+        undoStack.clear();
         clearRequested = true;
         canvas.requestPaint();
     }
 
     function undo() {
-        print("undoing");
+//        print("undoing");
+        undoRequested = true;
+        canvas.requestPaint();
     }
 
     tools: CanvasToolbar {
