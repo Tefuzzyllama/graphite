@@ -10,6 +10,10 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### Changes ###
 
+* Friday, 16th August 2013
+    + added realistic brushes
+    + added eraser tool
+
 * Wednesday, 14th August 2013
     + added undo support
 
@@ -21,16 +25,12 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### TODO and known issues ###
 
-This app is **far** from complete.
-
-* Implement drawing logic in SketchPage.qml
+* Write drawing logic in SketchPage.qml
     + write logic for different tools:
-        * pen
-        * pencil
-        * eraser
+        * acrylic brush
     + add colour switcher tool
 * Complete EventsPage.qml
 * Complete AllSketchesPage.qml
 * Write SketchbooksPage.qml
-* Implement logic for saving files (local storage and Ubuntu One, any ideas how?)
-* Implement logic for sharing with online accounts
+* Write logic for saving files (local storage and Ubuntu One)
+* Write logic for sharing with online accounts
