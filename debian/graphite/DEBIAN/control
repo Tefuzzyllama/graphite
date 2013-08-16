@@ -1,0 +1,11 @@
+Package: graphite
+Version: 0.1
+Architecture: all
+Maintainer: Adam Cowdy <tefuzzyllama@gmail.com>
+Installed-Size: 197
+Depends: qtdeclarative5-localstorage-plugin, qtdeclarative5-particles-plugin, qtdeclarative5-qtquick2-plugin, qtdeclarative5-ubuntu-ui-toolkit-plugin | qt-components-ubuntu, qtdeclarative5-window-plugin, qtdeclarative5-xmllistmodel-plugin, ubuntu-ui-toolkit-theme, qmlscene
+Section: unknown
+Priority: extra
+Description: Advanced drawing application for multiple devices
+ Graphite is a drawing, note taking and sketching application designed to run
+ on phones, desktops and tablets.

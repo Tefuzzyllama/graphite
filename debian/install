@@ -17,6 +17,4 @@ components /usr/share/graphite
 components/Toolbar.qml /usr/share/graphite
 components/CanvasToolbar.qml /usr/share/graphite
 Makefile /usr/share/graphite
-scripts /usr/share/graphite
-scripts/draw.js /usr/share/graphite
 Graphite.desktop /usr/share/applications
