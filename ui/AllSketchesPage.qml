@@ -24,8 +24,31 @@ Page {
 
     }
 
-    Column {
-        spacing: units.gu(2)
-        anchors.centerIn: parent
+    Text {
+        id: text
+        text: "No drawings. Create a drawing by swiping up from the bottom of the screen and pressing new."
+        wrapMode: Text.WordWrap
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        anchors.fill: parent
+    }
+
+    GridView {
+        anchors.margins: {
+            right: units.gu(2)
+            left: units.gu(2)
+            bottom: units.gu(2)
+            top: units.gu(2)
+        }
+        anchors.fill: parent
+        model: graphiteDrawingDb
+        delegate: DrawingItem {
+
+        }
+
+    }
+
+    Component.onCompleted: {
+
     }
 }

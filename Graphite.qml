@@ -17,13 +17,8 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import U1db 1.0 as U1db
 import "ui"
-
-/*!
-    \brief MainView with Tabs element.
-           First Tab has a single Label and
-           second Tab has a single ToolbarAction.
-*/
 
 MainView {
     id: mainView
@@ -33,11 +28,7 @@ MainView {
     // Note! applicationName needs to match the .desktop filename 
     applicationName: "Graphite"
     
-    /* 
-     This property enables the application to change orientation 
-     when the device is rotated. The default is false.
-    */
-    //automaticOrientation: true
+    automaticOrientation: true
     
     width: units.gu(75)
     height: units.gu(60)
@@ -54,7 +45,7 @@ MainView {
                 objectName: "allSketchesTab"
                 title: i18n.tr("All")
                 page: AllSketchesPage {
-
+                    id: allSketchesPage
                 }
             }
         
@@ -70,6 +61,18 @@ MainView {
             id: sketchPage
             visible: false
         }
+    }
+
+    U1db.Database {
+        id: graphiteDrawingDb
+        path: "graphiteDrawingDb"
+
+    }
+
+    U1db.Document {
+        id: drawingTemplate
+        docId: "template"
+        database: graphiteDrawingDb
     }
 
     // Helper functions

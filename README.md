@@ -10,6 +10,9 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### Changes ###
 
+* Tuesday, 20th August 2013
+    + added opening and saving functionality
+
 * Friday, 16th August 2013
     + added realistic brushes
     + added eraser tool
@@ -30,7 +33,5 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
         * acrylic brush
     + add colour switcher tool
 * Complete EventsPage.qml
-* Complete AllSketchesPage.qml
 * Write SketchbooksPage.qml
-* Write logic for saving files (local storage and Ubuntu One)
 * Write logic for sharing with online accounts

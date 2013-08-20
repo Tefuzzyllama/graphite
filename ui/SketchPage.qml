@@ -26,8 +26,11 @@ Page {
     property bool drawingFinished: false
     property bool clearRequested: false
     property bool undoRequested: false
-    property real pencilBrushSize: 3
+    property real pencilBrushSize: 4
     property real eraserBrushSize: 10
+    property variant document
+    property variant docRequested: null
+    property string docName
     property string tool: "pencil"
 
     ListModel {
@@ -91,8 +94,8 @@ Page {
         }
 
         onPaint: {
-            print("start x: " + input.startx);
-            print("mouse X: " + input.mx);
+//            print("start x: " + input.startx);
+//            print("mouse X: " + input.mx);
 //            print("start y: " + input.starty);
 //            print("mouse Y: " + input.my);
 //            print("distance: " + distanceBetweenTwoPoints
@@ -107,6 +110,16 @@ Page {
                 ctx.rect(0, 0, width, height);
                 ctx.fill();
                 clearRequested = false;
+            }
+
+            if (docRequested) {
+                print("doc requested")
+                ctx.reset();
+                ctx.fillStyle = "white";
+                ctx.rect(0, 0, width, height);
+                ctx.fill();
+                ctx.drawImage(docRequested.contents.src, 0, 0);
+                docRequested = null;
             }
 
             if (undoRequested) {
@@ -181,6 +194,7 @@ Page {
             }
             else if (sketchPage.drawingFinished) {
                 print("drawing finished");
+                saveDrawing();
                 drawingFinished = false;
             }
         }
@@ -189,7 +203,24 @@ Page {
     function newDrawing() {
         print("New Drawing");
         undoStack.clear();
+
+        var date = new Date();
+        docName = Qt.formatDateTime(date, "yyMMddhhmmss");
+
         clearRequested = true;
+        canvas.requestPaint();
+        canvas.width = mainView.width - units.gu("5");
+        canvas.height = mainView.height - units.gu("5");
+        canvas.loadImage("../graphics/pencil_brush.png");
+    }
+
+    function openDrawing(doc) {
+        print("opening " + doc.docId)
+        undoStack.clear();
+
+        docName = doc.docId;
+        docRequested = doc;
+
         canvas.requestPaint();
         canvas.width = mainView.width - units.gu("5");
         canvas.height = mainView.height - units.gu("5");
@@ -202,6 +233,12 @@ Page {
         canvas.requestPaint();
     }
 
+    function saveDrawing() {
+        document = {};
+        document = drawingTemplate;
+        document.docId = docName;
+        document.contents = {"src": canvas.toDataURL("image/png")};
+    }
 
     // Helper function to work out distance between two points
     function distanceBetweenTwoPoints(sx, sy, ex, ey) {
