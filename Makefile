@@ -16,8 +16,5 @@ autopilot:
 
 check:
 
-debclean:
-	dh clean
-
 run:
 	/usr/bin/qmlscene $@ Graphite.qml

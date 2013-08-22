@@ -128,6 +128,7 @@ Page {
                     print("undo stack: " + undoStack.count);
                     ctx.drawImage(undoStack.get(undoStack.count - 1).src, 0, 0);
                     undoStack.remove(undoStack.count - 1);
+                    saveDrawing();
                     print("undo finished");
                 }
                 else {

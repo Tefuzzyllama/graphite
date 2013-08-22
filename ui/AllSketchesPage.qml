@@ -26,7 +26,7 @@ Page {
 
     Text {
         id: text
-        text: "No drawings. Create a drawing by swiping up from the bottom of the screen and pressing new."
+        text: "Create a drawing by swiping up from the bottom of the screen and pressing new."
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -43,12 +43,9 @@ Page {
         anchors.fill: parent
         model: graphiteDrawingDb
         delegate: DrawingItem {
-
+            Component.onCompleted: {
+                text.visible = false;
+            }
         }
-
-    }
-
-    Component.onCompleted: {
-
     }
 }
