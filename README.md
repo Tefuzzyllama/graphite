@@ -8,7 +8,10 @@ Graphite is a drawing application for Ubuntu touch designed to run primarily on 
 
 This app is being developed for the [Ubuntu App Showdown](http://developer.ubuntu.com/showdown/).
 
-### Changes ###
+### Changelog ###
+
+* Sunday, 8th September 2013
+	+ added colour switcher
 
 * Tuesday, 20th August 2013
     + added opening and saving functionality
@@ -31,7 +34,4 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 * Write drawing logic in SketchPage.qml
     + write logic for different tools:
         * acrylic brush
-    + add colour switcher tool
 * Complete EventsPage.qml
-* Write SketchbooksPage.qml
-* Write logic for sharing with online accounts
