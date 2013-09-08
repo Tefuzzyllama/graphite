@@ -54,7 +54,6 @@ Page {
             canvas.requestPaint();
         }
         onPositionChanged: {
-
             mx = mouse.x;
             my = mouse.y;
             sketchPage.isDrawing = true;
@@ -84,9 +83,8 @@ Page {
         renderStrategy: Canvas.Immediate
 
         Component.onCompleted: {
-            width = mainView.width - units.gu("5");
-            height = mainView.height - units.gu("5");
-            loadImage("../graphics/pencil_brush.png");
+            width = mainView.width;
+            height = mainView.height;
         }
 
         onImageLoaded: {
@@ -168,11 +166,12 @@ Page {
 
                 if (tool == "pencil") {
                     for (var iz = 0; iz <= dist || iz == 0; iz += iplacement) {
-                        ctx.globalAlpha = 0.2;
+                        ctx.globalAlpha = 0.3;
                         brushx = input.startx + (Math.sin(angl) * iz) - brushSizeOt;
                         brushy = input.starty + (Math.cos(angl) * iz) - brushSizeOt;
-                        ctx.drawImage("../graphics/pencil_brush.png",
-                                brushx, brushy, pencilBrushSize, pencilBrushSize);
+                        ctx.drawImage("../graphics/pencil_brush_"
+                                    + toolbar.sketchPageColour + ".png",
+                                    brushx, brushy, pencilBrushSize, pencilBrushSize);
                     }
                 }
                 else if (tool == "eraser") {
@@ -210,9 +209,8 @@ Page {
 
         clearRequested = true;
         canvas.requestPaint();
-        canvas.width = mainView.width - units.gu("5");
-        canvas.height = mainView.height - units.gu("5");
-        canvas.loadImage("../graphics/pencil_brush.png");
+        canvas.width = mainView.width;
+        canvas.height = mainView.height;
     }
 
     function openDrawing(doc) {
@@ -223,9 +221,8 @@ Page {
         docRequested = doc;
 
         canvas.requestPaint();
-        canvas.width = mainView.width - units.gu("5");
-        canvas.height = mainView.height - units.gu("5");
-        canvas.loadImage("../graphics/pencil_brush.png");
+        canvas.width = mainView.width;
+        canvas.height = mainView.height;
     }
 
     function undo() {
@@ -238,7 +235,7 @@ Page {
         document = {};
         document = drawingTemplate;
         document.docId = docName;
-        document.contents = {"src": canvas.toDataURL("image/png")};
+        document.contents = {"src": canvas.toDataURL("image/jpeg")};
     }
 
     // Helper function to work out distance between two points

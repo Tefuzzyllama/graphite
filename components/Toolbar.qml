@@ -21,8 +21,6 @@ import Ubuntu.Components.Popups 0.1
 import "../ui"
 
 ToolbarItems {
-    id: toolbar
-
     ToolbarButton {
         iconSource: icon("add")
         text: i18n.tr("New")
@@ -30,14 +28,6 @@ ToolbarItems {
         onTriggered: {
             sketchPage.newDrawing()
             pageStack.push(sketchPage)
-        }
-    }
-    ToolbarButton {
-        iconSource: icon("select")
-        text: i18n.tr("Select")
-
-        onTriggered: {
-
         }
     }
 }

@@ -14,7 +14,7 @@
    id="svg2985"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="wheel.svg">
+   sodipodi:docname="wheel_pink.svg">
   <defs
      id="defs2987" />
   <sodipodi:namedview
@@ -55,13 +55,13 @@
      transform="translate(0,-8)">
     <path
        sodipodi:type="arc"
-       style="fill:#808080;fill-opacity:1;stroke:none"
+       style="fill:#ff7fe5;fill-opacity:1;stroke:none"
        id="path2993"
        sodipodi:cx="18.20339"
        sodipodi:cy="17.898306"
        sodipodi:rx="14.542373"
        sodipodi:ry="14.542373"
-       d="m 32.745763,17.898306 c 0,8.031531 -6.510842,14.542373 -14.542373,14.542373 -8.031531,0 -14.5423726,-6.510842 -14.5423726,-14.542373 0,-8.0315308 6.5108416,-14.5423728 14.5423726,-14.5423728 8.031531,0 14.542373,6.510842 14.542373,14.5423728 z"
+       d="m 32.745763,17.898306 a 14.542373,14.542373 0 1 1 -29.0847456,0 14.542373,14.542373 0 1 1 29.0847456,0 z"
        transform="matrix(0.82517484,0,0,0.82517484,-3.0209794,5.2307683)" />
   </g>
 </svg>

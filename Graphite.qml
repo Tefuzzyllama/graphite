@@ -65,8 +65,7 @@ MainView {
 
     U1db.Database {
         id: graphiteDrawingDb
-        path: "graphiteDrawingDb"
-
+        path: "graphite.u1db"
     }
 
     U1db.Document {

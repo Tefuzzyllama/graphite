@@ -24,6 +24,7 @@ import "../ui"
 ToolbarItems {
     id: canvasToolbar
     property string sketchPageTool: "pencil"
+    property string sketchPageColour: "black"
 
     back: ToolbarButton {
         text: i18n.tr("Sketches")
@@ -32,6 +33,10 @@ ToolbarItems {
         onTriggered: {
             pageStack.pop()
         }
+    }
+
+    onSketchPageColourChanged: {
+        coloursButton.iconSource = "../graphics/wheel_" + sketchPageColour + ".svg"
     }
 
     ToolbarButton {
@@ -44,8 +49,13 @@ ToolbarItems {
         }
     }
     ToolbarButton {
+        id: coloursButton
         text: i18n.tr("Colours")
-        iconSource: Qt.resolvedUrl("../graphics/wheel.svg")
+        iconSource: Qt.resolvedUrl("../graphics/wheel_black.svg")
+
+        onTriggered: {
+            PopupUtils.open(coloursPopoverComponent, coloursButton)
+        }
     }
     ToolbarButton {
         text: i18n.tr("Undo")
@@ -126,7 +136,83 @@ ToolbarItems {
         }
     }
 
+    Component {
+        id: coloursPopoverComponent
+        Popover {
+            id: coloursPopover
+
+            ListItem.Empty {
+                height: units.gu(30)
+                width: parent.width
+
+                GridView {
+                    id: grid
+                    anchors.fill: parent
+                    anchors.margins: units.gu(2)
+
+                    model: coloursModel
+
+                    delegate: Item {
+                        id: colourItem
+                        width: 48
+                        height: 48
+                        anchors.margins: units.gu(0)
+
+                        UbuntuShape {
+                            color: model.colour
+                            anchors.fill: parent
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    sketchPageColour = model.colour
+                                    print("colours item clicked")
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     function onToolSelected (tool) {
         sketchPageTool = tool;
+    }
+
+    ListModel {
+        id: coloursModel
+
+        ListElement {
+            colour: "black"
+        }
+        ListElement {
+            colour: "blue"
+        }
+        ListElement {
+            colour: "red"
+        }
+        ListElement {
+            colour: "green"
+        }
+        ListElement {
+            colour: "yellow"
+        }
+        ListElement {
+            colour: "orange"
+        }
+        ListElement {
+            colour: "purple"
+        }
+        ListElement {
+            colour: "pink"
+        }
+        ListElement {
+            colour: "brown"
+        }
+        ListElement {
+            colour: "cyan"
+        }
     }
 }

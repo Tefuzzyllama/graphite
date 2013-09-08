@@ -54,8 +54,8 @@ UbuntuShape {
                     ListItem.Standard {
                         text: i18n.tr("delete");
                         onTriggered: {
-                            requestDelete(model);
-                            PopupUtils.close(itemPopover);
+                            PopupUtils.open(deleteDialogComponent)
+                            PopupUtils.close(itemPopover)
                         }
                     }
                 }
@@ -63,8 +63,30 @@ UbuntuShape {
         }
     }
 
+    Component {
+        id: deleteDialogComponent
+
+        Dialog {
+            id: deleteDialog
+            title: "Delete sketch"
+            text: "Are you sure you want to delete this sketch?"
+
+            Button {
+                text: "Yes"
+                onClicked: {
+                    PopupUtils.close(deleteDialog)
+                    requestDelete(model)
+                }
+            }
+            Button {
+                text: "No"
+                onClicked: PopupUtils.close(deleteDialog)
+            }
+        }
+    }
+
     function requestDelete (drawing) {
-        print("delete requested for " + drawing.docId);
-        graphiteDrawingDb.putDoc("", drawing.docId);
+        print("delete requested for " + drawing.docId)
+        graphiteDrawingDb.putDoc("", drawing.docId)
     }
 }

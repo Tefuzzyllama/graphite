@@ -20,8 +20,10 @@ import Ubuntu.Components 0.1
 import "../components"
 
 Page {
-    tools: Toolbar {
+    id: allSketches
 
+    tools: Toolbar {
+        id: toolbar
     }
 
     Text {

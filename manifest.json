@@ -1,17 +1,14 @@
 {
+    "description": "description of Graphite",
     "framework": "ubuntu-sdk-13.10",
-    "maintainer": "Adam Cowdy",
-    "name": "com.ubuntu.developer.tefuzzyllama.Graphite",
-    "security": {
-        "profiles": {
-            "Graphite": {
-                "policy_groups": [
-                    "networking"
-                ],
-                "policy_version": 1
-            }
+    "hooks": {
+        "Graphite": {
+            "apparmor": "Graphite.json",
+            "desktop": "Graphite.desktop"
         }
     },
-    "title": "Graphite Drawing Application",
+    "maintainer": "",
+    "name": "com.ubuntu.developer.username.Graphite",
+    "title": "Graphite",
     "version": "0.1"
 }
