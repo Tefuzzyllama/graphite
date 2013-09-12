@@ -4,11 +4,14 @@ Graphite Drawing
 Introduction
 ------------
 
-Graphite is a drawing application for Ubuntu touch designed to run primarily on tablets, but will also work on phones and desktop computers.
+Graphite is a drawing application for Ubuntu touch designed to run primarily on tablets, but will also work on phones and desktop computers. Its goals are ease of use, simplicity and to produce outcomes which look semi-natural.
 
 This app is being developed for the [Ubuntu App Showdown](http://developer.ubuntu.com/showdown/).
 
 ### Changelog ###
+
+* Thursday, 12th September 2013
+    + added acrylic brush tool
 
 * Sunday, 8th September 2013
 	+ added colour switcher
@@ -31,7 +34,4 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### TODO and known issues ###
 
-* Write drawing logic in SketchPage.qml
-    + write logic for different tools:
-        * acrylic brush
 * Complete EventsPage.qml

@@ -27,6 +27,7 @@ Page {
     property bool clearRequested: false
     property bool undoRequested: false
     property real pencilBrushSize: 4
+    property real acrylicBrushSize: 35
     property real eraserBrushSize: 10
     property variant document
     property variant docRequested: null
@@ -85,6 +86,18 @@ Page {
         Component.onCompleted: {
             width = mainView.width;
             height = mainView.height;
+
+            // load brushes
+//            loadImage("../graphics/pencil_brush_black")
+//            loadImage("../graphics/pencil_brush_red")
+//            loadImage("../graphics/pencil_brush_blue")
+//            loadImage("../graphics/pencil_brush_brown")
+//            loadImage("../graphics/pencil_brush_cyan")
+//            loadImage("../graphics/pencil_brush_green")
+//            loadImage("../graphics/pencil_brush_orange")
+//            loadImage("../graphics/pencil_brush_pink")
+//            loadImage("../graphics/pencil_brush_purple")
+//            loadImage("../graphics/pencil_brush_yellow")
         }
 
         onImageLoaded: {
@@ -156,15 +169,16 @@ Page {
 //                print("drawing continues...");
 //                ctx.lineTo(input.mx, input.my);
 //                ctx.stroke();
-                var brushx, brushy;
-                var dist = distanceBetweenTwoPoints
-                                 (input.startx, input.starty, input.mx, input.my);
-                var angl = angleBetweenTwoPoints
-                                 (input.startx, input.starty, input.mx, input.my);
-                var brushSizeOt = pencilBrushSize / 2;
-                var iplacement = 1;
+
 
                 if (tool == "pencil") {
+                    var brushx, brushy;
+                    var dist = distanceBetweenTwoPoints
+                                     (input.startx, input.starty, input.mx, input.my);
+                    var angl = angleBetweenTwoPoints
+                                     (input.startx, input.starty, input.mx, input.my);
+                    var brushSizeOt = pencilBrushSize / 2;
+                    var iplacement = 1;
                     for (var iz = 0; iz <= dist || iz == 0; iz += iplacement) {
                         ctx.globalAlpha = 0.3;
                         brushx = input.startx + (Math.sin(angl) * iz) - brushSizeOt;
@@ -172,6 +186,23 @@ Page {
                         ctx.drawImage("../graphics/pencil_brush_"
                                     + toolbar.sketchPageColour + ".png",
                                     brushx, brushy, pencilBrushSize, pencilBrushSize);
+                    }
+                }
+                else if (tool == "brush") {
+                    var brushx, brushy;
+                    var dist = distanceBetweenTwoPoints
+                                     (input.startx, input.starty, input.mx, input.my);
+                    var angl = angleBetweenTwoPoints
+                                     (input.startx, input.starty, input.mx, input.my);
+                    var brushSizeOt = acrylicBrushSize / 2;
+                    var iplacement = 1;
+                    for (var iz = 0; iz <= dist || iz == 0; iz += iplacement) {
+                        ctx.globalAlpha = 0.1;
+                        brushx = input.startx + (Math.sin(angl) * iz) - brushSizeOt;
+                        brushy = input.starty + (Math.cos(angl) * iz) - brushSizeOt;
+                        ctx.drawImage("../graphics/acrylic_brush_"
+                                   + toolbar.sketchPageColour + ".png",
+                                   brushx, brushy, acrylicBrushSize, acrylicBrushSize);
                     }
                 }
                 else if (tool == "eraser") {

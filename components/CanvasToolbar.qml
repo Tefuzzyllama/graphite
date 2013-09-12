@@ -106,6 +106,34 @@ ToolbarItems {
                     }
                 }
                 ListItem.Standard {
+                    id: brushItem
+                    text: i18n.tr("Brush")
+                    Image {
+                        id: brushSlctdImage
+                        source: icon("select")
+                        visible: false
+                        anchors {
+                            right: parent.right
+                            rightMargin: units.gu("2")
+                            verticalCenter: parent.verticalCenter
+                        }
+                        Component.onCompleted: {
+                            if (sketchPageTool == "brush") {
+                                brushSlctdImage.visible = true;
+                            }
+                        }
+
+                        width: 24
+                        height: 24
+                    }
+
+                    onTriggered: {
+                        print("brush selected");
+                        sketchPage.tool = "brush";
+                        PopupUtils.close(toolsPopover);
+                    }
+                }
+                ListItem.Standard {
                     id: eraserItem
                     text: i18n.tr("Eraser")
                     Image {
@@ -167,7 +195,7 @@ ToolbarItems {
                                 onClicked: {
                                     sketchPageColour = model.colour
                                     print("colours item clicked")
-
+                                    PopupUtils.close(coloursPopover)
                                 }
                             }
                         }
