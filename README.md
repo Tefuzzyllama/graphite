@@ -10,6 +10,9 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### Changelog ###
 
+* Saturday, 14th September 2013
+    + fixes and icon added
+
 * Thursday, 12th September 2013
     + added acrylic brush tool
 
@@ -34,4 +37,4 @@ This app is being developed for the [Ubuntu App Showdown](http://developer.ubunt
 
 ### TODO and known issues ###
 
-* Complete EventsPage.qml
+* delete doesn't work

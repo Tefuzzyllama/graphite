@@ -22,6 +22,8 @@ import "../components"
 Page {
     id: allSketches
 
+    title: "All Sketches"
+
     tools: Toolbar {
         id: toolbar
     }

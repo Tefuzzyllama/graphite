@@ -1,5 +1,5 @@
 {
-    "description": "description of Graphite",
+    "description": "Natural drawing application for touch",
     "framework": "ubuntu-sdk-13.10",
     "hooks": {
         "Graphite": {
@@ -7,8 +7,8 @@
             "desktop": "Graphite.desktop"
         }
     },
-    "maintainer": "",
-    "name": "com.ubuntu.developer.username.Graphite",
-    "title": "Graphite",
+    "maintainer": "Tefuzzyllama <tefuzzyllama@gmail.com>",
+    "name": "com.ubuntu.developer.tefuzzyllama.graphite",
+    "title": "Graphite Drawing",
     "version": "0.1"
 }

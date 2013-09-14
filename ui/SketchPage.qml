@@ -38,6 +38,10 @@ Page {
         id: undoStack
     }
 
+    Keys.onEscapePressed: pageStack.pop()
+    Keys.onSpacePressed: toolbar.opened = true
+    Component.onCompleted: root.forceActiveFocus()
+
     MouseArea {
         property int startx: 0;
         property int starty: 0;
@@ -197,7 +201,7 @@ Page {
                     var brushSizeOt = acrylicBrushSize / 2;
                     var iplacement = 1;
                     for (var iz = 0; iz <= dist || iz == 0; iz += iplacement) {
-                        ctx.globalAlpha = 0.1;
+                        ctx.globalAlpha = 0.05;
                         brushx = input.startx + (Math.sin(angl) * iz) - brushSizeOt;
                         brushy = input.starty + (Math.cos(angl) * iz) - brushSizeOt;
                         ctx.drawImage("../graphics/acrylic_brush_"

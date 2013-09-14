@@ -2,7 +2,7 @@
 Name=Graphite
 Comment=Natural Drawing Application
 Exec=/usr/bin/qmlscene $@ /usr/share/graphite/Graphite.qml
-Icon=qmlscene
+Icon=graphite.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true

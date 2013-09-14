@@ -32,31 +32,20 @@ MainView {
     
     width: units.gu(75)
     height: units.gu(60)
-//    backgroundColor: "#3d3c38"
+
+    headerColor: Qt.rgba(0.8, 0.2, 0.2, 1)
+    backgroundColor: Qt.rgba(0.8, 0.3, 0.3, 1)
+    footerColor: Qt.rgba(0.8, 0.3, 0.3, 1)
     
     PageStack {
         id: pageStack
-        Component.onCompleted: push(tabs)
+        Component.onCompleted: push(allSketchesPage)
         
-        Tabs {
-            id: tabs
-
-            Tab {
-                objectName: "allSketchesTab"
-                title: i18n.tr("All")
-                page: AllSketchesPage {
-                    id: allSketchesPage
-                }
-            }
-        
-            Tab {
-                objectName: "eventsTab"
-                title: i18n.tr("Events")
-                page: EventsPage {
-
-                }
-            }
+        AllSketchesPage {
+            id: allSketchesPage
+            visible: false
         }
+
         SketchPage {
             id: sketchPage
             visible: false
