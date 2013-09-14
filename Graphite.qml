@@ -63,6 +63,18 @@ MainView {
         database: graphiteDrawingDb
     }
 
+    U1db.Index {
+        database: graphiteDrawingDb
+        id: by_src
+        expression: ["src"]
+    }
+
+    U1db.Query {
+        id: modelQuery
+        index: by_src
+        query: [{"src":"*"}]
+    }
+
     // Helper functions
     function icon(name) {
         return "/usr/share/icons/ubuntu-mobile/actions/scalable/" + name + ".svg"

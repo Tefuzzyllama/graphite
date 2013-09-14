@@ -7,8 +7,8 @@
             "desktop": "Graphite.desktop"
         }
     },
-    "maintainer": "Tefuzzyllama <tefuzzyllama@gmail.com>",
+    "maintainer": "",
     "name": "com.ubuntu.developer.tefuzzyllama.graphite",
     "title": "Graphite Drawing",
-    "version": "0.1"
+    "version": "1.0"
 }

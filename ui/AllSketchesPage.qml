@@ -17,6 +17,9 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import U1db 1.0 as U1db
+import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import "../components"
 
 Page {
@@ -45,10 +48,72 @@ Page {
             top: units.gu(2)
         }
         anchors.fill: parent
-        model: graphiteDrawingDb
-        delegate: DrawingItem {
-            Component.onCompleted: {
-                text.visible = false;
+        model: modelQuery
+
+        delegate: UbuntuShape {
+            id: drawingItem
+            width: units.gu(10)
+            height: units.gu(10)
+
+            Component.onCompleted: text.visible = false;
+
+            image: Image {
+                source: contents.src
+            }
+            MouseArea {
+                id: input
+                anchors.fill: parent
+                onClicked: {
+                    sketchPage.openDrawing(model);
+                    pageStack.push(sketchPage);
+                }
+                onPressAndHold: {
+                    PopupUtils.open(itemPopoverComponent, drawingItem);
+                }
+                Component {
+                    id: itemPopoverComponent
+                    Popover {
+                        id: itemPopover
+                        Column {
+                            anchors {
+                                top: parent.top
+                                right: parent.right
+                                left: parent.left
+                            }
+
+                            ListItem.Standard {
+                                text: i18n.tr("delete");
+                                onTriggered: {
+                                    PopupUtils.open(deleteDialogComponent)
+                                    PopupUtils.close(itemPopover)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            Component {
+                id: deleteDialogComponent
+
+                Dialog {
+                    id: deleteDialog
+                    title: "Delete sketch"
+                    text: "Are you sure you want to delete this sketch?"
+
+                    Button {
+                        text: "Yes"
+                        onClicked: {
+                            PopupUtils.close(deleteDialog)
+                            graphiteDrawingDb.putDoc("", model.docId)
+                            print("deleted")
+                        }
+                    }
+                    Button {
+                        text: "No"
+                        onClicked: PopupUtils.close(deleteDialog)
+                    }
+                }
             }
         }
     }

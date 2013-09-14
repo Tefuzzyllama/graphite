@@ -75,7 +75,10 @@ UbuntuShape {
                 text: "Yes"
                 onClicked: {
                     PopupUtils.close(deleteDialog)
-                    requestDelete(model)
+                    var document = {}
+                    document = drawingTemplate
+                    document.contents = {"none":"none"}
+                    document.docId = model.docId;
                 }
             }
             Button {
@@ -83,10 +86,5 @@ UbuntuShape {
                 onClicked: PopupUtils.close(deleteDialog)
             }
         }
-    }
-
-    function requestDelete (drawing) {
-        print("delete requested for " + drawing.docId)
-        graphiteDrawingDb.putDoc("", drawing.docId)
     }
 }
